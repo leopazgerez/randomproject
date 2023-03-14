@@ -16,9 +16,10 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Card Component'),
         centerTitle: true,
       ),
-      body: Row(
+      body: Column(
         children: [
           CardComponent(),
+          Placeholder(child: SizedBox(height: 200,),)
         ],
       ),
     );

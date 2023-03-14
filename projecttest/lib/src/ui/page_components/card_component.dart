@@ -12,7 +12,20 @@ class CardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     double _radius = 50;
     Color _fontCOlor = Colors.white;
-    return Card(  
+    return Expanded(
+      child: ListView.builder(
+        // shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+          itemCount: 50,
+          itemBuilder: (context, index) {
+            return (buildCard(_radius, _fontCOlor));
+          }),
+    );
+    // buildCard(_radius, _fontCOlor);
+  }
+
+  Widget buildCard(double _radius, Color _fontCOlor) {
+    return Card(
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radius)),
       color: Colors.black,
@@ -119,9 +132,18 @@ class CardComponent extends StatelessWidget {
         height: 25,
         child: Row(
           children: const [
-            SizedBox(width: 10,),
-            Icon(Icons.star,color: Colors.amber,size: 20,),
-            Text('3.4',style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.amber,
+              size: 20,
+            ),
+            Text(
+              '3.4',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),
