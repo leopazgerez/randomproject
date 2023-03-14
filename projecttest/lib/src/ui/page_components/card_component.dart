@@ -3,9 +3,11 @@ import 'package:projecttest/src/models/breakfast_model.dart';
 
 class CardComponent extends StatelessWidget {
   String? image;
+  String? title;
+  String? subtitle;
   double? price;
   double? rating;
-  CardComponent({Key? key, this.rating, this.price, this.image})
+  CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle})
       : super(key: key);
 
   @override
@@ -21,7 +23,6 @@ class CardComponent extends StatelessWidget {
             return (buildCard(_radius, _fontCOlor));
           }),
     );
-    // buildCard(_radius, _fontCOlor);
   }
 
   Widget buildCard(double _radius, Color _fontCOlor) {
@@ -59,7 +60,7 @@ class CardComponent extends StatelessWidget {
               flex: 3,
               child: Container(
                 child: Text(
-                  '\$55',
+                   '${price!}',
                   style: TextStyle(color: _fontCOlor, fontSize: 35),
                 ),
               ),
@@ -92,14 +93,14 @@ class CardComponent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Capuccino',
+                title!,
                 style: TextStyle(
                     color: _fontCOlor,
                     fontSize: 35,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                'with Oat Milk',
+                subtitle!,
                 style: TextStyle(color: _fontCOlor, fontSize: 20),
               ),
             ],
@@ -131,18 +132,18 @@ class CardComponent extends StatelessWidget {
         width: 75,
         height: 25,
         child: Row(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               width: 10,
             ),
-            Icon(
+            const Icon(
               Icons.star,
               color: Colors.amber,
               size: 20,
             ),
             Text(
-              '3.4',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              '${rating!}',
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             )
           ],
         ),
@@ -152,7 +153,7 @@ class CardComponent extends StatelessWidget {
 
   Widget imageBuild() {
     return Image.network(
-        'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
+        image!,
         fit: BoxFit.fill);
   }
 }
