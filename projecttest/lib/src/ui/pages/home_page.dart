@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projecttest/src/ui/components/filter_categories_component.dart';
+import 'package:projecttest/src/ui/components/grid_cards.dart';
 import 'package:projecttest/src/ui/components/searcher_component.dart';
 import 'package:projecttest/src/ui/page_components/card_component.dart';
 
@@ -88,47 +89,62 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  bool cardsTest = true;
+
+  changeCards() {
+    setState(() {
+      cardsTest = !cardsTest;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xff0c1015),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xffd27841),
+          onPressed: changeCards,
+          child: const Icon(
+            Icons.cable_rounded,
+            color: Colors.white,
+          ),
+        ),
         appBar: AppBar(
           title: const Center(child: Text("Coffee App")),
           backgroundColor: const Color(0xff0c1015),
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SearcherComponent(
-                  onChanged: onChanged,
-                ),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SearcherComponent(
+                onChanged: onChanged,
               ),
-              FilterCategoriesComponent(
-                onSelected: onSelected,
-                categories: categories,
-              ),
-              GridCards(
-                cards: currentCards,
-              ),
-              CardComponent(
-                image:
-                    'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-                rating: 3.4,
-                price: 89,
-                title: 'Capuccino',
-                subtitle: 'with Oat Milk',
-              ),
-              const Placeholder(
-                child: SizedBox(
-                  height: 200,
-                ),
-              )
-            ],
-          ),
+            ),
+            FilterCategoriesComponent(
+              onSelected: onSelected,
+              categories: categories,
+            ),
+            cardsTest
+                ? GridCards(
+                    cards: currentCards,
+                  )
+                : CardComponent(
+                    image:
+                        'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
+                    rating: 3.4,
+                    price: 89,
+                    title: 'Capuccino',
+                    subtitle: 'with Oat Milk',
+                  ),
+            // const Placeholder(
+            //   child: SizedBox(
+            //     height: 200,
+            //   ),
+            // )
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
@@ -140,45 +156,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class GridCards extends StatelessWidget {
-  final List<String>? cards;
-  const GridCards({Key? key, this.cards}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 600,
-      padding: const EdgeInsets.all(20),
-      child: cards != null
-          ? GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemCount: cards!.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      border: Border.all(
-                        width: 2,
-                        color: Colors.white,
-                      )),
-                  child: Text(
-                    cards![index],
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            )
-          : const Center(child: Text("Sin tarjetas")),
     );
   }
 }
