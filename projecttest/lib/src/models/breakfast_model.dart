@@ -7,14 +7,17 @@ class BreakfastModel {
   String? ingredient;
   double? price;
   double? rating;
+  int? votes;
 
-  BreakfastModel(
-      {this.title,
-      this.description,
-      this.image,
-      this.subtitle,
-      this.features,
-      this.ingredient,
-      this.price,
-      this.rating});
+  BreakfastModel({
+    this.title,
+    this.description,
+    this.image,
+    this.subtitle,
+    this.features,
+    this.ingredient,
+    this.price,
+    this.rating,
+    this.votes,
+  });
 }
