@@ -3,6 +3,7 @@ import 'package:projecttest/src/ui/components/filter_categories_component.dart';
 import 'package:projecttest/src/ui/components/grid_cards.dart';
 import 'package:projecttest/src/ui/components/searcher_component.dart';
 import 'package:projecttest/src/ui/page_components/card_component.dart';
+import 'package:projecttest/src/ui/page_components/search_component.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
