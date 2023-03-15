@@ -26,8 +26,9 @@ class _HomePageState extends State<HomePage> {
             price: 89,
             title: 'Capuccino',
             subtitle: 'with Oat Milk',
+            height: 350,
           ),
-          Placeholder()
+          // Placeholder()
         ],
       ),
       bottomNavigationBar:  BottomNavigationBar(items: const [

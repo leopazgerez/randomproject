@@ -8,8 +8,9 @@ class CardComponent extends StatelessWidget {
   double? price;
   double? rating;
   double? height;
-  CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle})
-      : super(key: key);
+  Color? color;
+  CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle, this.height, this.color})
+      : assert (height!>=250, 'height must be greater than 250') ,super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +32,17 @@ class CardComponent extends StatelessWidget {
     );
   }
 
-  Widget buildCard(double _radius, Color _fontCOlor) {
+  Widget buildCard(double _radius, Color _fontColor) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
         child: AspectRatio(
           aspectRatio: 5/8,
-          child: SizedBox(
-              // width: 250,
-              // height: 400,
+          child: Container(
+            decoration: BoxDecoration(
+              color: color != null ? color : Colors.black,
+              borderRadius: BorderRadius.circular(_radius)
+            ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -48,8 +51,8 @@ class CardComponent extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    module2(_fontCOlor),
-                    module3(_fontCOlor),
+                    module2(_fontColor),
+                    module3(_fontColor),
                   ],
                 ),
               ),
@@ -59,44 +62,38 @@ class CardComponent extends StatelessWidget {
     );
   }
 
-  Widget module3(Color _fontCOlor) {
+  Widget module3(Color _fontColor) {
+    double _sizePrice = height! *0.08;
     return Expanded(
       flex: 2,
-      child: Container(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                child: FittedBox(
-                  child: Text(
-                     '${price!}',
-                    // style: TextStyle(color: _fontCOlor, fontSize: 35),
-                  ),
-                ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            child: FittedBox(
+              child: Text(
+                 '${price!}',
+                style: TextStyle(color: _fontColor, fontSize: height != null ? _sizePrice : 20),
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: Container(
-                child: FittedBox(
-                  child: Icon(
-                    Icons.add_circle_outline,
-                    color: _fontCOlor,
-                    // size: 50,
-                  ),
-                ),
+          ),
+          Container(
+            child: FittedBox(
+              child: Icon(
+                Icons.add_circle_outline,
+                color: _fontColor,
+                size: 40,
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
 
-  Widget module2(Color _fontCOlor) {
+  Widget module2(Color _fontColor) {
+    double _sizeTitle = height! *0.08;
+    double _sizeSubtitle = height! *0.04;
     return Expanded(
       flex: 3,
       child: Row(
@@ -105,20 +102,16 @@ class CardComponent extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FittedBox(
-                child: Text(
-                  title!,
-                  style: TextStyle(
-                      color: _fontCOlor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
+              Text(
+                title!,
+                style: TextStyle(
+                    color: _fontColor,
+                    fontSize: height != null ? _sizeTitle : 20,
+                    fontWeight: FontWeight.bold),
               ),
-              FittedBox(
-                child: Text(
-                  subtitle!,
-                  style: TextStyle(color: _fontCOlor, fontSize: 10),
-                ),
+              Text(
+                subtitle!,
+                style: TextStyle(color: _fontColor, fontSize: height != null ? _sizeSubtitle : 10),
               ),
             ],
           ),
