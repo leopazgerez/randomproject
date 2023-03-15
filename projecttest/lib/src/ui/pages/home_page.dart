@@ -116,36 +116,39 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xff0c1015),
           elevation: 0,
         ),
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SearcherComponent(
-                onChanged: onChanged,
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SearcherComponent(
+                  onChanged: onChanged,
+                ),
               ),
-            ),
-            FilterCategoriesComponent(
-              onSelected: onSelected,
-              categories: categories,
-            ),
-            cardsTest
-                ? GridCards(
-                    cards: currentCards,
-                  )
-                : CardComponent(
-                    image:
-                        'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-                    rating: 3.4,
-                    price: 89,
-                    title: 'Capuccino',
-                    subtitle: 'with Oat Milk',
-                  ),
-            // const Placeholder(
-            //   child: SizedBox(
-            //     height: 200,
-            //   ),
-            // )
-          ],
+              FilterCategoriesComponent(
+                onSelected: onSelected,
+                categories: categories,
+              ),
+              cardsTest
+                  ? GridCards(
+                      cards: currentCards,
+                    )
+                  : CardComponent(
+                      image:
+                          'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
+                      rating: 3.4,
+                      price: 89,
+                      title: 'Capuccino',
+                      subtitle: 'with Oat Milk',
+                    ),
+              // const Placeholder(
+              //   child: SizedBox(
+              //     height: 200,
+              //   ),
+              // )
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
