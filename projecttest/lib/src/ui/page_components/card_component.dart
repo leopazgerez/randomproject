@@ -14,11 +14,16 @@ class CardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     double _radius = 50;
     Color _fontCOlor = Colors.white;
-    return Expanded(
-      child: ListView.builder(
+    var size = MediaQuery.of(context).size;
+    var _width = size.width;
+    return SizedBox(
+      width: _width,
+      height: 400,
+      child: ListView.separated(
         // shrinkWrap: true,
         scrollDirection: Axis.horizontal,
           itemCount: 50,
+          separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 25,),
           itemBuilder: (context, index) {
             return (buildCard(_radius, _fontCOlor));
           }),
@@ -26,11 +31,7 @@ class CardComponent extends StatelessWidget {
   }
 
   Widget buildCard(double _radius, Color _fontCOlor) {
-    return Card(
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radius)),
-      color: Colors.black,
-      child: SizedBox(
+    return SizedBox(
         width: 250,
         height: 400,
         child: Padding(
@@ -46,7 +47,6 @@ class CardComponent extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 
