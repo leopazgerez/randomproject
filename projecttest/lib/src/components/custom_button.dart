@@ -44,7 +44,7 @@ class _CustomButtonState extends State<CustomButton> {
           color: widget.color,
           height: widget.size,
           width: widget.size,
-          child: contenido,
+          child: Center(child: contenido),
         ),
       ),
     );
