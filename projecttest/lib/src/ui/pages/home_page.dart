@@ -17,21 +17,18 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Card Component'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            SearchComponent(),
-            CardComponent(
-              image: 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-              rating: 3.4,
-              price: 89,
-              title: 'Capuccino',
-              subtitle: 'with Oat Milk',
-            ),
-
-          ],
-        ),
+      body: Column(
+        children: [
+          SearchComponent(),
+          CardComponent(
+            image: 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
+            rating: 3.4,
+            price: 89,
+            title: 'Capuccino',
+            subtitle: 'with Oat Milk',
+          ),
+          Placeholder()
+        ],
       ),
       bottomNavigationBar:  BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled),label: ''),

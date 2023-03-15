@@ -7,6 +7,7 @@ class CardComponent extends StatelessWidget {
   String? subtitle;
   double? price;
   double? rating;
+  double? height;
   CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle})
       : super(key: key);
 
@@ -18,7 +19,7 @@ class CardComponent extends StatelessWidget {
     var _width = size.width;
     return SizedBox(
       width: _width,
-      height: 400,
+      height: height != null ? height : 250,
       child: ListView.separated(
         // shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -31,22 +32,30 @@ class CardComponent extends StatelessWidget {
   }
 
   Widget buildCard(double _radius, Color _fontCOlor) {
-    return SizedBox(
-        width: 250,
-        height: 400,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              module1(_radius),
-              const SizedBox(
-                height: 10,
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: AspectRatio(
+          aspectRatio: 5/8,
+          child: SizedBox(
+              // width: 250,
+              // height: 400,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    module1(_radius),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    module2(_fontCOlor),
+                    module3(_fontCOlor),
+                  ],
+                ),
               ),
-              module2(_fontCOlor),
-              module3(_fontCOlor),
-            ],
           ),
         ),
+      ),
     );
   }
 
@@ -59,9 +68,11 @@ class CardComponent extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Container(
-                child: Text(
-                   '${price!}',
-                  style: TextStyle(color: _fontCOlor, fontSize: 35),
+                child: FittedBox(
+                  child: Text(
+                     '${price!}',
+                    // style: TextStyle(color: _fontCOlor, fontSize: 35),
+                  ),
                 ),
               ),
             ),
@@ -70,10 +81,12 @@ class CardComponent extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                child: Icon(
-                  Icons.add_circle_outline,
-                  color: _fontCOlor,
-                  size: 50,
+                child: FittedBox(
+                  child: Icon(
+                    Icons.add_circle_outline,
+                    color: _fontCOlor,
+                    // size: 50,
+                  ),
                 ),
               ),
             )
@@ -92,16 +105,20 @@ class CardComponent extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title!,
-                style: TextStyle(
-                    color: _fontCOlor,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold),
+              FittedBox(
+                child: Text(
+                  title!,
+                  style: TextStyle(
+                      color: _fontCOlor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              Text(
-                subtitle!,
-                style: TextStyle(color: _fontCOlor, fontSize: 20),
+              FittedBox(
+                child: Text(
+                  subtitle!,
+                  style: TextStyle(color: _fontCOlor, fontSize: 10),
+                ),
               ),
             ],
           ),
@@ -136,14 +153,18 @@ class CardComponent extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            const Icon(
-              Icons.star,
-              color: Colors.amber,
-              size: 20,
+            const FittedBox(
+              child: Icon(
+                Icons.star,
+                color: Colors.amber,
+                // size: 20,
+              ),
             ),
-            Text(
-              '${rating!}',
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            FittedBox(
+              child: Text(
+                '${rating!}',
+                // style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),
