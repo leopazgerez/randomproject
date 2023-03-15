@@ -25,10 +25,15 @@ class _HomePageState extends State<HomePage> {
             title: 'Capuccino',
             subtitle: 'with Oat Milk',
           ),
-          Placeholder(child: SizedBox(height: 200,),)
+          const Placeholder(child: SizedBox(height: 200,),)
         ],
       ),
+      bottomNavigationBar:  BottomNavigationBar(items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home_filled),label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_sharp),label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.heart_broken),label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.add_alert),label: ''),
+      ],),
     );
   }
 }
-// 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg'
