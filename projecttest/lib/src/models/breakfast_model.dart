@@ -1,7 +1,7 @@
 class BreakfastModel {
   String title;
   String photo;
-  String description;
+  String? description;
   String? features;
   String subtitle;
   String? ingredient;
@@ -9,7 +9,7 @@ class BreakfastModel {
 
   BreakfastModel(
       {required this.title,
-      required this.description,
+      this.description,
       required this.photo,
       required this.subtitle,
       this.features,

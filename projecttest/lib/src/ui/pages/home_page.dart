@@ -1,61 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:projecttest/src/components/custom_button.dart';
 import 'package:projecttest/src/components/custom_card.dart';
+import 'package:projecttest/src/components/custom_filteraAndList.dart';
 import 'package:projecttest/src/models/breakfast_model.dart';
+import 'package:projecttest/src/models/categorys_model.dart';
 import 'package:projecttest/src/models/itembreakfast_model.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  final BreakfastModel product;
+  final ItemBreakfastModel example;
+  final List<ItemBreakfastModel> items;
+  final Category category1;
+  final Category category2;
+  final Category category3;
+  final List<Category> categorys;
 
-  @override
-  Widget build(BuildContext context) {
-    BreakfastModel product = BreakfastModel(
+  MyHomePage({
+    this.product = BreakfastModel(
         title: "Capuccino",
         subtitle: "With oat milk",
         photo:
-            "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
-        description:
-            " aaaaaaaaaaaaa aaaaaaa defefew efwefewfew efewefwee eegre",
-        rating: 4.5);
-    ItemBreakfastModel example =
+            "hhttps://e7r2euwepto.exactdn.com/wp-content/uploads/capuccino.jpg?strip=all&lossy=1&ssl=1g",
+        rating: 4.5),
+    this.example =
         ItemBreakfastModel(product: product, price: 4.20);
 
-    List<ItemBreakfastModel> items = [
+    this.items = [
       example,
       example,
       example,
       example,
     ];
+    super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final searchControl = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(children: [
-        CustomButton(
-          onTap: () {
-            print("siiiii");
-          },
-          color: Colors.green,
-          size: 80,
-          //icon: const Icon(
-          // Icons.favorite,
-          //color: Colors.black,
-          // size: 40,
-          // ),
-          urlImage:
-              "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
-        ),
-        SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-            child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(
-                      width: 20,
-                    ),
-                itemCount: items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CustomCard(items[index]);
-                })),
-      ]),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(children: [FilterAndList(searchController)]),
+      ),
     );
   }
 }

@@ -4,8 +4,9 @@ import 'package:projecttest/src/models/itembreakfast_model.dart';
 
 class CustomCard extends StatefulWidget {
   final ItemBreakfastModel item;
+  double height;
 
-  const CustomCard(this.item, {super.key});
+  CustomCard(this.item, {this.height = 282, super.key});
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -17,8 +18,14 @@ class _CustomCardState extends State<CustomCard> {
     return ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: Container(
-          color: const Color(0xff0e1318),
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: <Color>[Color(0xff312b2c), Color(0xff0e1318)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  tileMode: TileMode.clamp)),
           width: MediaQuery.of(context).size.width / 2,
+          height: widget.height,
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Stack(children: [
@@ -43,15 +50,14 @@ class _CustomCardState extends State<CustomCard> {
 
   Widget titleAndSubtitle() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, top: 10),
+      padding: const EdgeInsets.only(bottom: 8, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 3),
+            padding: const EdgeInsets.only(bottom: 2),
             child: Text(widget.item.product!.title,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                style: const TextStyle(fontSize: 20)),
           ),
           Text(
             widget.item.product!.subtitle,
@@ -89,32 +95,29 @@ class _CustomCardState extends State<CustomCard> {
   }
 
   Widget raiting() {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Container(
-          width: 50,
-          padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: const Color(0xff0e1318).withOpacity(0.5),
-            borderRadius:
-                const BorderRadius.only(bottomLeft: Radius.circular(30)),
-          ),
-          child: Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 6, right: 3),
-                child: Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                  size: 12,
-                ),
+    return Container(
+        width: 50,
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          color: const Color(0xff0e1318).withOpacity(0.5),
+          borderRadius:
+              const BorderRadius.only(bottomLeft: Radius.circular(30)),
+        ),
+        child: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 6, right: 3),
+              child: Icon(
+                Icons.star,
+                color: Colors.amber,
+                size: 12,
               ),
-              Text(
-                widget.item.product!.rating.toStringAsFixed(1),
-                style: const TextStyle(fontSize: 15),
-              )
-            ],
-          )),
-    );
+            ),
+            Text(
+              widget.item.product!.rating.toStringAsFixed(1),
+              style: const TextStyle(fontSize: 15),
+            )
+          ],
+        ));
   }
 }
