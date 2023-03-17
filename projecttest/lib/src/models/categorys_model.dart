@@ -1,6 +1,5 @@
-class Category {
-  final int id;
-  final String name;
-
-  Category(this.id, this.name);
+enum Category {
+  Capuccino,
+  Te,
+  Cafe,
 }
