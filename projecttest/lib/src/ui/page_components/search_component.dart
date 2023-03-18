@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../models/breakfast_model.dart';
+
 class SearchComponent extends StatefulWidget {
-  const SearchComponent({Key? key}) : super(key: key);
+  final List<BreakfastModel>? list;
+  SearchComponent({Key? key, this.list}) : super(key: key);
 
   @override
   State<SearchComponent> createState() => _SearchComponentState();
 }
 
 class _SearchComponentState extends State<SearchComponent> {
+TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -18,9 +22,13 @@ class _SearchComponentState extends State<SearchComponent> {
   }
   Widget _customTextformField() {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+      ),
       child: TextFormField(
-        decoration: InputDecoration(
-          icon: Icon(Icons.search),
+        controller: search,
+        decoration: const InputDecoration(
+          icon:  Icon(Icons.search),
         ) ,
       ),
     );

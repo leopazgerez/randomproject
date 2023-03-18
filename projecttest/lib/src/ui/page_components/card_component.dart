@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projecttest/src/models/breakfast_model.dart';
+import 'package:projecttest/src/ui/page_components/custom_button.dart';
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
 
 class CardComponent extends StatelessWidget {
   String? image;
@@ -9,91 +11,86 @@ class CardComponent extends StatelessWidget {
   double? rating;
   double? height;
   Color? color;
-  CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle, this.height, this.color})
-      : assert (height!>=250, 'height must be greater than 250') ,super(key: key);
+
+  CardComponent({Key? key, this.rating, this.price, this.image, this.title, this.subtitle, this.height = 250, this.color})
+      : assert (height! >= 250, 'height must be greater than 250') ,super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double _radius = 50;
-    Color _fontCOlor = Colors.white;
+    double radius = 30;
+    Color fontColor = Colors.white;
     var size = MediaQuery.of(context).size;
-    var _width = size.width;
+    var width = size.width;
     return SizedBox(
-      width: _width,
-      height: height != null ? height : 250,
+      width: width,
+      height: height ?? 250,
       child: ListView.separated(
-        // shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-          itemCount: 50,
+          itemCount: 5,
           separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 25,),
           itemBuilder: (context, index) {
-            return (buildCard(_radius, _fontCOlor));
+            return (buildCard(radius, fontColor));
           }),
     );
   }
 
-  Widget buildCard(double _radius, Color _fontColor) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.center,
-        child: AspectRatio(
-          aspectRatio: 5/8,
-          child: Container(
-            decoration: BoxDecoration(
-              color: color != null ? color : Colors.black,
-              borderRadius: BorderRadius.circular(_radius)
-            ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    module1(_radius),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    module2(_fontColor),
-                    module3(_fontColor),
-                  ],
-                ),
-              ),
-          ),
+  Widget buildCard(double radius, Color fontColor) {
+    return AspectRatio(
+      aspectRatio: 5/8,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color ?? const Color(0xff0e1318),
+          borderRadius: BorderRadius.circular(radius)
         ),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                module1(radius),
+                const SizedBox(
+                  height: 10,
+                ),
+                module2(fontColor),
+                module3(fontColor),
+              ],
+            ),
+          ),
       ),
     );
   }
 
-  Widget module3(Color _fontColor) {
-    double _sizePrice = height! *0.08;
+  Widget module3(Color fontColor) {
+    double sizePrice = height! *0.08;
+    double sizeButton = height! *0.13;
+
     return Expanded(
       flex: 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            child: FittedBox(
-              child: Text(
-                 '${price!}',
-                style: TextStyle(color: _fontColor, fontSize: height != null ? _sizePrice : 20),
-              ),
+            child: Row(
+              children: [
+                Icon(Icons.attach_money, color: Color(0xffcf7842),),
+                Text(
+                   '${price!}',
+                  style: TextStyle(color: fontColor, fontSize: height != null ? sizePrice : 20),
+                ),
+              ],
             ),
           ),
           Container(
-            child: FittedBox(
-              child: Icon(
-                Icons.add_circle_outline,
-                color: _fontColor,
-                size: 40,
-              ),
+            child: CustomButton(color: const Color(0xffcf7842), size: height != null ? sizeButton : 40, icon: Icon(Icons.add),)
             ),
-          )
         ],
       ),
     );
   }
 
-  Widget module2(Color _fontColor) {
-    double _sizeTitle = height! *0.08;
-    double _sizeSubtitle = height! *0.04;
+  Widget module2(Color fontColor) {
+    double sizeTitle = height! *0.08;
+    double sizeSubtitle = height! *0.04;
     return Expanded(
       flex: 3,
       child: Row(
@@ -105,13 +102,14 @@ class CardComponent extends StatelessWidget {
               Text(
                 title!,
                 style: TextStyle(
-                    color: _fontColor,
-                    fontSize: height != null ? _sizeTitle : 20,
-                    fontWeight: FontWeight.bold),
+                    color: fontColor,
+                    fontSize: height != null ? sizeTitle : 20,
+                    ),
               ),
+              const SizedBox(height: 3,),
               Text(
                 subtitle!,
-                style: TextStyle(color: _fontColor, fontSize: height != null ? _sizeSubtitle : 10),
+                style: TextStyle(color: fontColor, fontSize: height != null ? sizeSubtitle : 10),
               ),
             ],
           ),
@@ -120,11 +118,11 @@ class CardComponent extends StatelessWidget {
     );
   }
 
-  Widget module1(double _radius) {
+  Widget module1(double radius) {
     return Expanded(
       flex: 8,
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(_radius),
+          borderRadius: BorderRadius.circular(radius),
           child: Stack(
             children: [imageBuild(), ratingBuild()],
           )),
@@ -132,6 +130,10 @@ class CardComponent extends StatelessWidget {
   }
 
   Widget ratingBuild() {
+    var sizeIcon = height! * 0.043;
+    var sizePrice = height! * 0.046;
+    var _width = height! * 0.2;
+    var _height = height! * 0.075;
     return Align(
       alignment: Alignment.topRight,
       child: Container(
@@ -139,25 +141,26 @@ class CardComponent extends StatelessWidget {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50)),
           color: Colors.black54,
         ),
-        width: 75,
-        height: 25,
+        width: height != null ? _width : 60,
+        height: height != null ? _height : 20,
         child: Row(
           children: [
             const SizedBox(
               width: 10,
             ),
-            const FittedBox(
-              child: Icon(
-                Icons.star,
-                color: Colors.amber,
-                // size: 20,
-              ),
+            Icon(
+              Icons.star,
+              color: Colors.amber,
+              size: height != null ? sizeIcon : 13,
             ),
-            FittedBox(
-              child: Text(
-                '${rating!}',
-                // style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              ),
+            const SizedBox(
+              width: 4,
+            ),
+            Text(
+              '${rating!}',
+              style: TextStyle(
+                  fontSize: height != null ? sizePrice : 14,
+                  fontWeight: FontWeight.bold),
             )
           ],
         ),
