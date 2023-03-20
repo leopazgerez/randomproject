@@ -1,4 +1,4 @@
-enum Category {
+enum Categorys {
   Capuccino,
   Te,
   Cafe,
