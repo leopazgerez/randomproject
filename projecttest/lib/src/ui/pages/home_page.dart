@@ -102,15 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // void filterFinal() {
-  //   setState(() {
-  //     filterByCategory();
-  //     if (searchControl.text.isNotEmpty) {
-  //       filterSearch();
-  //     }
-  //   });
-  // }
-
   @override
   void initState() {
     filterBycategory();
@@ -126,17 +117,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(children: [
-          Filter(searchControl, categoryMap, selectCategory),
-          listScroll(),
-        ]),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Filter(searchControl, categoryMap, selectCategory),
+            listScroll(),
+          ]),
+        ),
       ),
     );
   }
 
   Widget listScroll() {
     return SizedBox(
-        height: 300,
+        height: 282,
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             separatorBuilder: (BuildContext context, int index) =>
