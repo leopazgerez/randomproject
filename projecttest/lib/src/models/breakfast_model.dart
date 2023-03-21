@@ -1,5 +1,7 @@
+import 'package:projecttest/src/models/categorys_model.dart';
+
 class BreakfastModel {
-  String title;
+  Categorys title;
   String photo;
   String? description;
   String? features;
