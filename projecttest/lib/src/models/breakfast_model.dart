@@ -1,20 +1,25 @@
 import 'package:projecttest/src/models/categorys_model.dart';
+import 'package:projecttest/src/models/ingredient_enum.dart';
 
 class BreakfastModel {
   Categorys title;
   String photo;
-  String? description;
-  String? features;
+  String description;
+  String features;
   String subtitle;
-  String? ingredient;
+  Ingredients ingredient1;
+  Ingredients ingredient2;
   double rating;
+  int likes;
 
   BreakfastModel(
       {required this.title,
-      this.description,
+      required this.description,
       required this.photo,
       required this.subtitle,
-      this.features,
-      this.ingredient,
-      required this.rating});
+      required this.features,
+      required this.ingredient1,
+      required this.ingredient2,
+      required this.rating,
+      required this.likes});
 }
