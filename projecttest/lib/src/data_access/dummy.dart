@@ -1,19 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:projecttest/src/enums/category_enum.dart';
+import 'package:projecttest/src/interfaces/data_acces.dart';
 import 'package:projecttest/src/models/breakfast_model.dart';
 
-import '../../enums/category_enum.dart';
+class DummyData implements IDataAccess {
 
-class HomePageController extends ControllerMVC {
-  HomePageController._();
-  static HomePageController _this = HomePageController._();
-  static HomePageController get con => _this;
-  factory HomePageController() {
-    if (_this == null) _this = HomePageController();
-    return _this;
-  }
-  TextEditingController controller = TextEditingController();
-  final Map<CategoryEnum, bool> categories = {
+  @override
+  Map<CategoryEnum, bool> getCategory(){
+      return{
     CategoryEnum.capuccino: true,
     CategoryEnum.chocolate: false,
     CategoryEnum.gorriadas: false,
@@ -21,8 +14,11 @@ class HomePageController extends ControllerMVC {
     CategoryEnum.mate: false,
     CategoryEnum.sopa: false,
   };
-  final List<BreakfastModel> searchResult = [];
-  final List<BreakfastModel> itemToSearch = [
+  }
+  
+  @override
+  List<BreakfastModel> getListProduct(){
+    return [
     BreakfastModel(
       title: 'Capuccino',
       category: CategoryEnum.capuccino,
@@ -90,26 +86,11 @@ class HomePageController extends ControllerMVC {
       description: 'sdfsdf',
     ),
   ];
-
-  void selectCategory(CategoryEnum category) {
-    categories.updateAll((key, value) => false);
-    categories.update(category, (value) => true);
-    filter();
   }
+  
+  @override
+  void selectCategory() {}
 
-  void filter() {
-    List<BreakfastModel> aux = [];
-    for (var element in itemToSearch) {
-      if ((element.subtitle!.contains(controller.text) ||
-              controller.text.isEmpty) &&
-          categories[element.category] != null &&
-          categories[element.category]!) {
-        aux.add(element);
-      }
-    }
-    searchResult.clear();
-    setState(() {
-      searchResult.addAll(aux);
-    });
-  }
+  @override
+  void filterResult(){}
 }

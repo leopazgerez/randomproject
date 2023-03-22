@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projecttest/src/models/breakfast_model.dart';
 import 'package:projecttest/src/ui/page_components/card_component.dart';
 import 'package:projecttest/src/ui/page_components/search_component.dart';
 import 'package:projecttest/src/ui/page_components/second_card_component.dart';
+import 'package:projecttest/src/ui/pagescontroller/home_pagecontroller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +13,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+ 
+
+  void searchMeth(String? searchText) {
+    setState(() {
+      listAux = list
+          .where((element) =>
+              element.title!.toLowerCase().contains(searchText!.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +43,9 @@ class _HomePageState extends State<HomePage> {
             //   subtitle: 'with Oat Milk',
             //   height: 300,
             // ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             // Expanded(
             //   child: ListView.builder(
             //     scrollDirection: Axis.horizontal,
@@ -51,16 +66,33 @@ class _HomePageState extends State<HomePage> {
             //   aspectRatio: 5/6,
             //     height: 500,
             // )
-            SearchComponent()
+            SearchComponent(
+              controller: search,
+            ),
+            Expanded(child: listaModelo(list)),
           ],
         ),
       ),
-      bottomNavigationBar:  BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled),label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_sharp),label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.heart_broken),label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.add_alert),label: ''),
-      ],),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_balance_wallet_sharp), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.heart_broken), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.add_alert), label: ''),
+        ],
+      ),
+    );
+  }
+
+  Widget listaModelo(list) {
+    return ListView.separated(
+      itemCount: list.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(list[index].title!),
+        subtitle: Text(list[index].subtitle!),
+      ),
+      separatorBuilder: (context, index) => const Divider(),
     );
   }
 }

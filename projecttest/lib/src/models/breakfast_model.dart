@@ -1,3 +1,5 @@
+import 'package:projecttest/src/enums/category_enum.dart';
+
 class BreakfastModel {
   String? title;
   String? image;
@@ -7,9 +9,11 @@ class BreakfastModel {
   String? ingredient;
   double? price;
   double? rating;
+  CategoryEnum? category;
 
   BreakfastModel(
       {this.title,
+      this.category,
       this.description,
       this.image,
       this.subtitle,

@@ -115,6 +115,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  mvc_pattern:
+    dependency: "direct main"
+    description:
+      name: mvc_pattern
+      sha256: "5955a81bad132ce037b57f739a227f73d9e3903f81d47cab0ffbbb04647b95eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.4.0"
   path:
     dependency: transitive
     description:
