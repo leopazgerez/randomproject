@@ -18,6 +18,6 @@ class DataManager {
   }
 
   List<BreakfastModel> getProductList() {
-    return dataAcces.getListProduct();
+    return dataAcces.getProductList();
   }
 }

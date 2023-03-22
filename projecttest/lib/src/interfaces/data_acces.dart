@@ -3,7 +3,7 @@ import 'package:projecttest/src/models/breakfast_model.dart';
 
 abstract class IDataAccess {
   Map<CategoryEnum, bool> getCategory();
-  List<BreakfastModel> getListProduct();
+  List<BreakfastModel> getProductList();
   void selectCategory();
   void filterResult();
 }

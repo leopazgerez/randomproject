@@ -17,7 +17,7 @@ class DummyData implements IDataAccess {
   }
   
   @override
-  List<BreakfastModel> getListProduct(){
+  List<BreakfastModel> getProductList(){
     return [
     BreakfastModel(
       title: 'Capuccino',

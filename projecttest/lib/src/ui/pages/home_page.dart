@@ -16,12 +16,14 @@ class _HomePageState extends StateMVC<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     _con.initPage();
     _con.filterController.addListener(() {
-      _con.filter();
+      setState(() {
+        _con.filterResult();
+      });
       print(_con.filterController.text);
     });
+    super.initState();
   }
 
   @override
@@ -51,9 +53,8 @@ class _HomePageState extends StateMVC<HomePage> {
               ),
             ),
             SecondFilter(
-              categories: _con.categories,
-              selectCategory: _con.selectCategory,
-            )
+                categories: _con.categories,
+                selectCategory: _con.selectCategory)
           ],
         ),
       ),

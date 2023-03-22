@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:projecttest/src/managers/datamanager.dart';
 import 'package:projecttest/src/models/breakfast_model.dart';
-
 import '../../enums/category_enum.dart';
 
 class HomePageController extends ControllerMVC {
@@ -22,13 +21,13 @@ class HomePageController extends ControllerMVC {
   selectCategory(CategoryEnum category) {
     categories.updateAll((key, value) => false);
     categories.update(category, (value) => true);
-    filter();
+    filterResult;
   }
 
-  filter() {
+  filterResult() {
     List<BreakfastModel> aux = [];
     for (var element in productList) {
-      if ((element.subtitle!.contains(filterController.text) ||
+      if ((element.subtitle!.toLowerCase().contains(filterController.text) ||
               filterController.text.isEmpty) &&
           categories[element.category] != null &&
           categories[element.category]!) {
@@ -36,13 +35,19 @@ class HomePageController extends ControllerMVC {
       }
     }
     searchResult.clear();
-    setState(() {
-      searchResult.addAll(aux);
-    });
+    // setState(() {
+    searchResult.addAll(aux);
+    // });
+  }
+
+  List<BreakfastModel> searchListResult() {
+    searchResult.addAll(filterResult());
+    return searchResult;
   }
 
   void initPage() {
     categories = dataManager.getCategory();
     productList = dataManager.getProductList();
+    filterResult;
   }
 }
