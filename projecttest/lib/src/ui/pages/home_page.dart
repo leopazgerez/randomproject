@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:projecttest/src/models/breakfast_model.dart';
 import 'package:projecttest/src/ui/pagescontroller/home_pagecontroller.dart';
-
 import '../page_components/search_component copy.dart';
 import '../page_components/second_filter.dart';
 
@@ -14,13 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends StateMVC<HomePage> {
-  final HomePageController _con = HomePageController.homePageController;
+  final HomePageController _con = HomePageController();
 
   @override
   void initState() {
-    _con.initPage;
-    _con.filterController.addListener(_con.filter);
     super.initState();
+    _con.initPage();
+    _con.filterController.addListener(() {
+      _con.filter();
+      print(_con.filterController.text);
+    });
   }
 
   @override

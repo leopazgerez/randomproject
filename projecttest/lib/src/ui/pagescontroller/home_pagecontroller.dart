@@ -6,14 +6,12 @@ import 'package:projecttest/src/models/breakfast_model.dart';
 import '../../enums/category_enum.dart';
 
 class HomePageController extends ControllerMVC {
-
   DataManager dataManager;
 
   HomePageController._(this.dataManager);
-  static HomePageController _this = HomePageController._(DataManager());
-  static HomePageController get homePageController => _this;
+  static final HomePageController _this = HomePageController._(DataManager());
+  static HomePageController get con => _this;
   factory HomePageController() {
-    if (_this == null) _this = HomePageController();
     return _this;
   }
   TextEditingController filterController = TextEditingController();
