@@ -1,98 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:projecttest/src/models/breakfast_model.dart';
-import 'package:projecttest/src/ui/page_components/card_component.dart';
-import 'package:projecttest/src/ui/page_components/search_component.dart';
-import 'package:projecttest/src/ui/page_components/second_card_component.dart';
 import 'package:projecttest/src/ui/pagescontroller/home_pagecontroller.dart';
+
+import '../page_components/search_component copy.dart';
+import '../page_components/second_filter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
- 
+class _HomePageState extends StateMVC<HomePage> {
+  final HomePageController _con = HomePageController.homePageController;
 
-  void searchMeth(String? searchText) {
-    setState(() {
-      listAux = list
-          .where((element) =>
-              element.title!.toLowerCase().contains(searchText!.toLowerCase()))
-          .toList();
-    });
+  @override
+  void initState() {
+    _con.initPage;
+    _con.filterController.addListener(_con.filter);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Card Component'),
-        centerTitle: true,
+        title: const Text('Filtro'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            // CardComponent(
-            //   image: 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-            //   rating: 3.4,
-            //   price: 89,
-            //   title: 'Capuccino',
-            //   subtitle: 'with Oat Milk',
-            //   height: 300,
-            // ),
-            const SizedBox(
-              height: 20,
-            ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: 5,
-            //       itemBuilder: (context, int item){return SecondCardComponent(image: 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-            //     rating: 3.4,
-            //     price: 89,
-            //     title: 'Capuccino',
-            //     subtitle: 'with Oat Milk',
-            //     height: 400,
-            //   );}),
-            // ),
-            // SecondCardComponent(image: 'https://i.pinimg.com/originals/7d/b3/53/7db3539960576e48ee49f7d1534a8d63.jpg',
-            //     rating: 3.4,
-            //     price: 89,
-            //     title: 'Cappuccino',
-            //     subtitle: 'with Oat Milk',
-            //   aspectRatio: 5/6,
-            //     height: 500,
-            // )
             SearchComponent(
-              controller: search,
+              controller: _con.filterController,
             ),
-            Expanded(child: listaModelo(list)),
+            Expanded(
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+                child: ListView.builder(
+                  itemCount: _con.searchResult.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(_con.searchResult[index].title!),
+                    subtitle: Text(_con.searchResult[index].subtitle!),
+                  ),
+                ),
+              ),
+            ),
+            SecondFilter(
+              categories: _con.categories,
+              selectCategory: _con.selectCategory,
+            )
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet_sharp), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.heart_broken), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.add_alert), label: ''),
-        ],
-      ),
-    );
-  }
-
-  Widget listaModelo(list) {
-    return ListView.separated(
-      itemCount: list.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(list[index].title!),
-        subtitle: Text(list[index].subtitle!),
-      ),
-      separatorBuilder: (context, index) => const Divider(),
     );
   }
 }
