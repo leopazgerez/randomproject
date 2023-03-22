@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:projecttest/src/enums/category_enum.dart';
 import 'package:projecttest/src/ui/pagescontroller/home_pagecontroller.dart';
 import '../page_components/search_component copy.dart';
 import '../page_components/second_filter.dart';
@@ -18,12 +19,22 @@ class _HomePageState extends StateMVC<HomePage> {
   void initState() {
     _con.initPage();
     _con.filterController.addListener(() {
-      setState(() {
-        _con.filterResult();
-      });
+      filterResult();
       print(_con.filterController.text);
     });
     super.initState();
+  }
+
+  filterResult() {
+    setState(() {
+      _con.filterResult();
+    });
+  }
+
+  selectedCategory(CategoryEnum category) {
+    setState(() {
+      _con.selectCategory(category);
+    });
   }
 
   @override
@@ -53,8 +64,7 @@ class _HomePageState extends StateMVC<HomePage> {
               ),
             ),
             SecondFilter(
-                categories: _con.categories,
-                selectCategory: _con.selectCategory)
+                categories: _con.categories, selectCategory: selectedCategory)
           ],
         ),
       ),

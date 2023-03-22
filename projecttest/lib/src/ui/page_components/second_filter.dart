@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:projecttest/src/enums/category_enum.dart';
 
 class SecondFilter extends StatefulWidget {
-  final Map<Enum, bool>? categories;
-  final Function? selectCategory;
+  final Map<CategoryEnum, bool>? categories;
+  final Function(CategoryEnum)? selectCategory;
   const SecondFilter({super.key, this.selectCategory, this.categories});
 
   @override
@@ -18,7 +19,7 @@ class _SecondFilterState extends State<SecondFilter> {
     return Expanded(child: _listTarjet(widget.categories!));
   }
 
-  Widget _listTarjet(Map<Enum, bool> catg) {
+  Widget _listTarjet(Map<CategoryEnum, bool> catg) {
     return ListView.separated(
         itemCount: catg.length,
         separatorBuilder: (context, index) => const Divider(),
@@ -28,7 +29,7 @@ class _SecondFilterState extends State<SecondFilter> {
             widget.categories!.keys.elementAt(index)));
   }
 
-  Widget _tarjet(String title, bool state, Enum categories) {
+  Widget _tarjet(String title, bool state, CategoryEnum categories) {
     double width = MediaQuery.of(context).size.width;
     return Container(
       width: width,

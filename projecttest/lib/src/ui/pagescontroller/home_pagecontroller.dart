@@ -13,7 +13,7 @@ class HomePageController extends ControllerMVC {
   factory HomePageController() {
     return _this;
   }
-  TextEditingController filterController = TextEditingController();
+  late TextEditingController filterController;
   Map<CategoryEnum, bool> categories = {};
   List<BreakfastModel> productList = [];
   List<BreakfastModel> searchResult = [];
@@ -21,7 +21,7 @@ class HomePageController extends ControllerMVC {
   selectCategory(CategoryEnum category) {
     categories.updateAll((key, value) => false);
     categories.update(category, (value) => true);
-    filterResult;
+    filterResult();
   }
 
   filterResult() {
@@ -40,14 +40,10 @@ class HomePageController extends ControllerMVC {
     // });
   }
 
-  List<BreakfastModel> searchListResult() {
-    searchResult.addAll(filterResult());
-    return searchResult;
-  }
-
   void initPage() {
+    filterController = TextEditingController();
     categories = dataManager.getCategory();
     productList = dataManager.getProductList();
-    filterResult;
+    filterResult();
   }
 }
