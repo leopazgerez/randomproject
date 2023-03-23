@@ -48,7 +48,7 @@ class _HomePageState extends StateMVC<HomePage> {
               ),
             ),
             Filter(
-              _con.dataManager.dataAcces.getCategorys(),
+              _con.getCategorys(),
               onItem: _con.onItem,
               colorFilterPrimary: Colors.grey.shade50,
               colorFilterSecondary: const Color(0xffcf7842),

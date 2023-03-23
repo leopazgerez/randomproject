@@ -2,18 +2,14 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:projecttest/src/enums/categorys_enum.dart';
 import 'package:projecttest/src/managers/data_manager.dart';
-import 'package:projecttest/src/models/breakfast_model.dart';
-import 'package:projecttest/src/enums/ingredient_enum.dart';
 import 'package:projecttest/src/models/itembreakfast_model.dart';
 
 class HomePageController extends ControllerMVC {
-  final DataManager dataManager;
-
-  HomePageController._(this.dataManager);
+  HomePageController._();
   static late HomePageController _this;
 
   factory HomePageController() {
-    _this = HomePageController._(DataManager());
+    _this = HomePageController._();
     return _this;
   }
 
@@ -29,8 +25,8 @@ class HomePageController extends ControllerMVC {
   }
 
   Categorys category() {
-    return dataManager.dataAcces.getCategorys().keys.firstWhere(
-        (element) => dataManager.dataAcces.getCategorys()[element] == true);
+    return DataManager().getCategorys().keys.firstWhere(
+        (element) => DataManager().dataAcces.getCategorys()[element] == true);
   }
 
   void onItem() {
@@ -41,7 +37,8 @@ class HomePageController extends ControllerMVC {
   }
 
   filterByCategory() {
-    itemsFilter = dataManager.dataAcces
+    itemsFilter = DataManager()
+        .dataAcces
         .getListItems()
         .where((element) => element.product!.title == category())
         .toList();
@@ -55,5 +52,9 @@ class HomePageController extends ControllerMVC {
               .contains(searchControl.text.toLowerCase()))
           .toList();
     });
+  }
+
+  Map<Categorys, bool> getCategorys() {
+    return DataManager().getCategorys();
   }
 }

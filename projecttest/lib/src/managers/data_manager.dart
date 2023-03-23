@@ -1,5 +1,6 @@
 import 'package:projecttest/src/data_acces/dummy_data_acces.dart';
 import 'package:projecttest/src/interfaces/i_data_acces.dart';
+import '../enums/categorys_enum.dart';
 
 class DataManager {
   final IDataAcces dataAcces;
@@ -12,5 +13,9 @@ class DataManager {
 
   factory DataManager() {
     return _data;
+  }
+
+  Map<Categorys, bool> getCategorys() {
+    return dataAcces.getCategorys();
   }
 }
