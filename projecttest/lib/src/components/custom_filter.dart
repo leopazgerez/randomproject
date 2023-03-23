@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projecttest/src/models/categorys_model.dart';
+import 'package:projecttest/src/enums/categorys_enum.dart';
 
 class Filter extends StatefulWidget {
   final Map<Categorys, bool> categorys;

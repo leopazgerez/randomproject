@@ -1,5 +1,5 @@
-import 'package:projecttest/src/models/categorys_model.dart';
-import 'package:projecttest/src/models/ingredient_enum.dart';
+import 'package:projecttest/src/enums/categorys_enum.dart';
+import 'package:projecttest/src/enums/ingredient_enum.dart';
 
 class BreakfastModel {
   Categorys title;

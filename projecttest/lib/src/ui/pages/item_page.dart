@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:projecttest/src/models/ingredient_enum.dart';
+import 'package:projecttest/src/enums/ingredient_enum.dart';
 import 'package:projecttest/src/models/itembreakfast_model.dart';
 
 class ItemPage extends StatefulWidget {
@@ -217,11 +217,13 @@ class _ItemPageState extends State<ItemPage> {
             text: TextSpan(children: [
               TextSpan(
                 text: firstPart,
-                style: const TextStyle(fontSize: 15, color: Colors.white),
+                style: const TextStyle(
+                    height: 1.8, fontSize: 15, color: Colors.white),
               ),
               TextSpan(
                 text: stateWidget ? secondPart : "",
-                style: const TextStyle(fontSize: 15, color: Colors.white),
+                style: const TextStyle(
+                    height: 1.8, fontSize: 15, color: Colors.white),
               ),
               secondPart != ""
                   ? TextSpan(
