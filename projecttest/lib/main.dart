@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projecttest/src/ui/pages/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.light(),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

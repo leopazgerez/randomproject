@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
+// ignore: must_be_immutable
 class SearchComponent extends StatefulWidget {
   TextEditingController? controller;
   SearchComponent({super.key, this.controller});
@@ -11,11 +10,12 @@ class SearchComponent extends StatefulWidget {
 }
 
 class _SearchComponentState extends State<SearchComponent> {
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       width: width,
       height: 50,
       decoration: BoxDecoration(
@@ -23,7 +23,7 @@ class _SearchComponentState extends State<SearchComponent> {
           borderRadius: BorderRadius.circular(25)),
       child: TextField(
         controller: widget.controller,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           icon: Icon(Icons.search),
           contentPadding: EdgeInsets.only(bottom: 15),

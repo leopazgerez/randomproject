@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomButton extends StatefulWidget {
   final Color color;
   final String? urlImage;
@@ -40,7 +41,7 @@ class _CustomButtonState extends State<CustomButton> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(widget.size / 3),
         child: Container(
-          padding: EdgeInsets.all(3),
+          padding: const EdgeInsets.all(3),
           color: widget.color,
           height: widget.size,
           width: widget.size,

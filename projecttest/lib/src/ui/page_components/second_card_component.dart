@@ -27,16 +27,18 @@ class SecondCardComponent extends StatefulWidget {
 }
 
 class _SecondCardComponentState extends State<SecondCardComponent> {
+
+  @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 6/6,
         child: Container(
           color: Colors.amber,
-          child: FittedBox(child: Text('data')),
+          child: const FittedBox(child: Text('data')),
         ));
   }
   // double _radius = widget!.height*0.1;
-  @override
+  // @override
   // Widget build(BuildContext context) {
   //   double radius = widget.height * 0.1;
   //   List<Color> colors = [const Color(0xff312b2c), Colors.black];
@@ -59,7 +61,7 @@ class _SecondCardComponentState extends State<SecondCardComponent> {
   //   );
   // }
 
-  Widget _part1(radius) {
+  Widget part1(radius) {
     double widthRating = widget.height *0.189;
     double heightRating = widget.height *0.064;
     double sizeIcon = widget.height *0.039;
@@ -112,7 +114,7 @@ class _SecondCardComponentState extends State<SecondCardComponent> {
     );
   }
 
-  Widget _part2() {
+  Widget part2() {
     double fontSizeTitle = widget.height *0.1;
     double fontSizeSubtitle = widget.height *0.046;
     return SizedBox(
@@ -130,7 +132,7 @@ class _SecondCardComponentState extends State<SecondCardComponent> {
     );
   }
 
-  Widget _part3() {
+  Widget part3() {
     double fontSizePrice = widget.height *0.1;
     double iconSize = widget.height *0.089;
     double buttonSize = widget.height *0.16;

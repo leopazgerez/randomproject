@@ -13,15 +13,30 @@ class HomePageController extends ControllerMVC {
   factory HomePageController() {
     return _this;
   }
+
   late TextEditingController filterController;
   Map<CategoryEnum, bool> categories = {};
   List<BreakfastModel> productList = [];
   List<BreakfastModel> searchResult = [];
 
+  CategoryEnum selectedCategory = CategoryEnum.capuccino;
+
+  void initPage() {
+    filterController = TextEditingController();
+    categories = dataManager.getCategory();
+    productList = dataManager.getProductList();
+    filterResult;
+  }
+
   selectCategory(CategoryEnum category) {
+    selectedCategory = category;
     categories.updateAll((key, value) => false);
     categories.update(category, (value) => true);
     filterResult();
+      // setState
+      // searchResult = productList
+      //     .where((element) => element.category == selectedCategory)
+      //     .toList();
   }
 
   filterResult() {
@@ -33,17 +48,18 @@ class HomePageController extends ControllerMVC {
           categories[element.category]!) {
         aux.add(element);
       }
+      searchResult.clear();
+      setState(() {
+        searchResult.addAll(aux);
+      });
     }
-    searchResult.clear();
-    // setState(() {
-    searchResult.addAll(aux);
-    // });
-  }
 
-  void initPage() {
-    filterController = TextEditingController();
-    categories = dataManager.getCategory();
-    productList = dataManager.getProductList();
-    filterResult();
+    // LINQ
+
+    // searchResult = productList
+    //     .where((element) => element.category == selectedCategory)
+    //     .toList();
+
+    // });
   }
 }

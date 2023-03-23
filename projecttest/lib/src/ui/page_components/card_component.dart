@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projecttest/src/models/breakfast_model.dart';
 import 'package:projecttest/src/ui/page_components/custom_button.dart';
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 
@@ -69,20 +68,16 @@ class CardComponent extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            child: Row(
-              children: [
-                Icon(Icons.attach_money, color: Color(0xffcf7842),),
-                Text(
-                   '${price!}',
-                  style: TextStyle(color: fontColor, fontSize: height != null ? sizePrice : 20),
-                ),
-              ],
-            ),
+          Row(
+            children: [
+              const Icon(Icons.attach_money, color: Color(0xffcf7842),),
+              Text(
+                 '${price!}',
+                style: TextStyle(color: fontColor, fontSize: height != null ? sizePrice : 20),
+              ),
+            ],
           ),
-          Container(
-            child: CustomButton(color: const Color(0xffcf7842), size: height != null ? sizeButton : 40, icon: Icon(Icons.add),)
-            ),
+          CustomButton(color: const Color(0xffcf7842), size: height != null ? sizeButton : 40, icon: const Icon(Icons.add),),
         ],
       ),
     );
@@ -132,8 +127,8 @@ class CardComponent extends StatelessWidget {
   Widget ratingBuild() {
     var sizeIcon = height! * 0.043;
     var sizePrice = height! * 0.046;
-    var _width = height! * 0.2;
-    var _height = height! * 0.075;
+    var innerWidth = height! * 0.2;
+    var innerHeight = height! * 0.075;
     return Align(
       alignment: Alignment.topRight,
       child: Container(
@@ -141,8 +136,8 @@ class CardComponent extends StatelessWidget {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50)),
           color: Colors.black54,
         ),
-        width: height != null ? _width : 60,
-        height: height != null ? _height : 20,
+        width: height != null ? innerWidth : 60,
+        height: height != null ? innerHeight : 20,
         child: Row(
           children: [
             const SizedBox(
