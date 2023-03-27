@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:projecttest/src/enums/ingredient_enum.dart';
@@ -14,7 +13,7 @@ class ItemPage extends StatefulWidget {
   State<ItemPage> createState() => _ItemPageState();
 }
 
-class _ItemPageState extends State<ItemPage> {
+class _ItemPageState extends StateMVC<ItemPage> {
   String sizeS = "S";
   String sizeM = "M";
   String sizeL = "L";
@@ -72,16 +71,39 @@ class _ItemPageState extends State<ItemPage> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
         child: Container(
-          padding: const EdgeInsets.all(25),
+          height: MediaQuery.of(context).size.height * 0.185,
+          padding: const EdgeInsets.all(20),
           color: const Color(0xff0e1318).withOpacity(0.2),
-          child: Container(
-            color: Colors.red,
-            child: Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Expanded(flex: 4, child: titleAndSubtile()),
+                Expanded(flex: 2, child: featuresProduct()),
+              ]),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(flex: 4, child: dataProduct()),
-                  Expanded(flex: 2, child: featuresProduct()),
-                ]),
+                  Expanded(flex: 4, child: raiting()),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                            color: const Color(0xff312b2c),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                          child: Text(
+                            widget.item.product!.features,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.grey),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),
@@ -92,19 +114,13 @@ class _ItemPageState extends State<ItemPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 5),
-          child: Text(
-            widget.item.product!.title.name,
-            style: const TextStyle(color: Colors.white, fontSize: 35),
-          ),
+        Text(
+          widget.item.product!.title.name,
+          style: const TextStyle(color: Colors.white, fontSize: 35),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Text(
-            widget.item.product!.subtitle,
-            style: const TextStyle(color: Colors.grey, fontSize: 30),
-          ),
+        Text(
+          widget.item.product!.subtitle,
+          style: const TextStyle(color: Colors.grey, fontSize: 30),
         ),
       ],
     );
@@ -130,41 +146,15 @@ class _ItemPageState extends State<ItemPage> {
     );
   }
 
-  Widget dataProduct() {
-    return Container(
-      color: Colors.pink,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            titleAndSubtile(),
-            raiting(),
-          ]),
-    );
-  }
-
   Widget featuresProduct() {
-    return Container(
-      color: Colors.amber,
-      child: Column(
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            ingredientItem(widget.item.product!.ingredient1),
-            ingredientItem(widget.item.product!.ingredient2),
-          ]),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                color: const Color(0xff312b2c),
-                borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              widget.item.product!.features,
-              style: const TextStyle(fontSize: 15, color: Colors.grey),
-              overflow: TextOverflow.ellipsis,
-            ),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          ingredientItem(widget.item.product!.ingredient1),
+          ingredientItem(widget.item.product!.ingredient2),
+        ]),
+      ],
     );
   }
 
